@@ -1,0 +1,141 @@
+{
+  "plugin_map": {
+    "go": [
+      "gopls-lsp@claude-plugins-official",
+      "cc-skills-golang@samber"
+    ],
+    "python": [
+      "pyright-lsp@claude-plugins-official"
+    ],
+    "rust": [
+      "rust-analyzer-lsp@claude-plugins-official"
+    ],
+    "typescript": [
+      "typescript-lsp@claude-plugins-official"
+    ],
+    "prometheus-exporter": [
+      "prometheus-exporter@prometheus-exporter-marketplace"
+    ],
+    "grafana-plugin": [
+      "grafana-plugins@grafana-skills",
+      "grafana-core@grafana-skills"
+    ],
+    "grafana-app-sdk": [
+      "grafana-app-sdk@grafana-skills"
+    ],
+    "observability-stack": [
+      "grafana-core@grafana-skills",
+      "grafana-lgtm@grafana-skills"
+    ],
+    "k6": [
+      "grafana-k6@grafana-skills"
+    ],
+    "frontend": [
+      "frontend-design@claude-plugins-official"
+    ],
+    "java": [
+      "jdtls-lsp@claude-plugins-official"
+    ],
+    "kotlin": [
+      "kotlin-lsp@claude-plugins-official"
+    ],
+    "php": [
+      "php-lsp@claude-plugins-official"
+    ],
+    "ruby": [
+      "ruby-lsp@claude-plugins-official"
+    ],
+    "swift": [
+      "swift-lsp@claude-plugins-official"
+    ],
+    "c-cpp": [
+      "clangd-lsp@claude-plugins-official"
+    ],
+    "csharp": [
+      "csharp-lsp@claude-plugins-official"
+    ],
+    "lua": [
+      "lua-lsp@claude-plugins-official"
+    ]
+  },
+  "stack_signals": {
+    "go": [
+      "go"
+    ],
+    "python": [
+      "python"
+    ],
+    "rust": [
+      "rust"
+    ],
+    "typescript": [
+      "typescript"
+    ],
+    "frontend": [
+      "typescript",
+      "frontend"
+    ],
+    "grafana-plugin": [
+      "typescript",
+      "frontend",
+      "grafana-plugin"
+    ],
+    "prometheus-exporter": [
+      "go",
+      "prometheus-exporter"
+    ],
+    "observability-stack": [
+      "observability-stack"
+    ],
+    "k6": [
+      "k6"
+    ],
+    "java": [
+      "java"
+    ],
+    "kotlin": [
+      "kotlin"
+    ],
+    "php": [
+      "php"
+    ],
+    "ruby": [
+      "ruby"
+    ],
+    "swift": [
+      "swift"
+    ],
+    "c-cpp": [
+      "c-cpp"
+    ],
+    "csharp": [
+      "csharp"
+    ],
+    "lua": [
+      "lua"
+    ],
+    "c": [
+      "c-cpp"
+    ],
+    "cpp": [
+      "c-cpp"
+    ],
+    "c++": [
+      "c-cpp"
+    ],
+    "javascript": [
+      "typescript"
+    ],
+    "php-wordpress": [
+      "php"
+    ]
+  },
+  "marketplaces": {
+    "claude-plugins-official": "",
+    "samber": "samber/cc",
+    "grafana-skills": "grafana/skills",
+    "prometheus-exporter-marketplace": "SckyzO/prometheus-exporter-plugin"
+  },
+  "always_keep": [],
+  "batch_exclude": []
+}

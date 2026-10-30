@@ -1,0 +1,9 @@
+{
+  "name": "project-setup",
+  "version": "0.1.0",
+  "description": "Frame any repository for Claude Code: detect the stack, mine past sessions for your corrections, ask only what the code can't tell, choose the plugins loaded per repo with their token cost, and generate a lean CLAUDE.md, CONTRIBUTING.md, docs/STATE.md and .claude/ config — nothing written before approval.",
+  "author": { "name": "SckyzO" },
+  "license": "MIT",
+  "repository": "https://github.com/SckyzO/claude-project-setup",
+  "keywords": ["claude-code", "claude-md", "onboarding", "project-setup", "context", "tokens", "plugins"]
+}

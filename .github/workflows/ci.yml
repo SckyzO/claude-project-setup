@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.13"]
+    # Official Python images instead of a setup-python action: one third-party
+    # action in this file (checkout), pinned by SHA.
+    container: python:${{ matrix.python }}-slim
+    steps:
+      - name: Install git (the tests create throwaway repositories)
+        run: apt-get update -qq && apt-get install -y -qq git >/dev/null
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Unit tests (stdlib only)
+        run: python -m unittest discover -s tests -v
+
+  plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Shipped skill files carry no maintainer-specific strings
+        run: |
+          if grep -rniE '/home/|sckyzo' skills/project-setup/SKILL.md skills/project-setup/references skills/project-setup/scripts; then
+            echo "::error::maintainer-specific string in shipped skill files"; exit 1
+          fi
+      - name: Install Claude Code CLI (best-effort)
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash || echo "::warning::Claude Code install failed - falling back to a jq structural check"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: claude plugin validate (jq fallback if the CLI is unavailable)
+        run: |
+          set -eu
+          if command -v claude >/dev/null 2>&1 && claude --version >/dev/null 2>&1; then
+            claude plugin validate . --strict
+            claude plugin validate . --profile directory
+          else
+            echo "::warning::claude CLI unavailable - structural check only, not equivalent to claude plugin validate"
+            jq -e '(.name|type=="string") and (.version|type=="string") and (.description|type=="string") and (.license|type=="string")' .claude-plugin/plugin.json >/dev/null
+            jq -e '(.plugin_map|type=="object") and (.stack_signals|type=="object") and (.always_keep|type=="array")' skills/project-setup/data/defaults.json >/dev/null
+            head -5 skills/project-setup/SKILL.md | grep -q '^name: project-setup$'
+            head -5 skills/project-setup/SKILL.md | grep -q '^description: '
+          fi
